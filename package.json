@@ -14,7 +14,9 @@
   "devDependencies": {
     "mocha": "^1.18.2",
     "chai": "^1.9.1",
-    "supertest": "^0.10.0"
+    "supertest": "^0.10.0",
+    "coffee-script": "^1.7.1",
+    "express": "^3.5.1"
   },
   "dependencies": {
     "requestify": "git://github.com/ranm8/requestify.git#v0.2.0",
