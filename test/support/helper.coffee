@@ -131,3 +131,43 @@ global.tplMsgs.menuLinkEvent = "
 <EventKey><![CDATA[www.qq.com]]></EventKey>
 </xml>
 "
+
+
+global.tplMsgs.txtContent = {
+    "content":"Hello World"
+}
+
+global.tplMsgs.imgContent = {
+    "media_id":"MEDIA_ID"
+}
+
+global.tplMsgs.voiceContent = {
+    "media_id":"MEDIA_ID"
+}
+
+global.tplMsgs.videoContent = {
+	"media_id":"MEDIA_ID",
+	"title":"TITLE",
+	"description":"DESCRIPTION"
+}
+
+global.tplMsgs.musicContent = {
+	"title":"MUSIC_TITLE",
+	"description":"MUSIC_DESCRIPTION",
+	"musicurl":"MUSIC_URL",
+	"hqmusicurl":"HQ_MUSIC_URL",
+	"thumb_media_id":"THUMB_MEDIA_ID" 
+}
+
+global.tplMsgs.newsContent = [{
+	 "title":"Happy Day1",
+	 "description":"Is Really A Happy Day",
+	 "url":"URL",
+	 "picurl":"PIC_URL"
+},
+{
+	 "title":"Happy Day2",
+	 "description":"Is Really A Happy Day",
+	 "url":"URL",
+	 "picurl":"PIC_URL"
+}]
