@@ -1,6 +1,11 @@
 wechat
 ======
 
+使用wechat 
+```shell
+npm install git+https://github.com/Mr-Wiredancer/wechat --save
+```
+
 
 中间件
 ```javascript
