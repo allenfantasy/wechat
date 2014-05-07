@@ -190,3 +190,87 @@ describe '传入数据库存储格式的content，检查返回的XML字符串', 
 			expect(result.xml.Articles[0].item[0]).to.deep.equal(item1)
 			expect(result.xml.Articles[0].item[1]).to.deep.equal(item2)
 		done()
+
+
+describe '传入XML格式的消息，返回可作为JSON格式客服消息发送的对象', ()->
+	describe '正确返回支持类型的消息', ()->
+		it "should 正确返回文本", (done)->
+			parseString tplMsgs.txtMsg, (err, result)->
+				expect(err).to.not.exist
+				msg = new WechatMessage(result.xml)
+				converted = msg.msg2KeFuMsg("anotherUser")
+				sample = 
+					"touser":"anotherUser"
+					"msgtype":"text"
+					"text":
+						"content":"this is a test"
+				expect(JSON.stringify(converted)).to.equal(JSON.stringify(sample))
+				done()
+
+		it "should 正确返回图片", (done)->
+			parseString tplMsgs.imgMsg, (err, result)->
+				expect(err).to.not.exist
+				msg = new WechatMessage(result.xml)
+				converted = msg.msg2KeFuMsg("anotherUser")
+				sample = 
+					"touser":"anotherUser"
+					"msgtype":"image"
+					"image":
+						"media_id":"media_id"
+				expect(JSON.stringify(converted)).to.equal(JSON.stringify(sample))
+				done()
+
+		it "should 正确返回语音", (done)->
+			parseString tplMsgs.voiceMsg, (err, result)->
+				expect(err).to.not.exist
+				msg = new WechatMessage(result.xml)
+				converted = msg.msg2KeFuMsg("anotherUser")
+				sample = 
+					"touser":"anotherUser"
+					"msgtype":"voice"
+					"voice":
+						"media_id":"media_id"
+				expect(JSON.stringify(converted)).to.equal(JSON.stringify(sample))
+				done()
+
+		it "should 正确返回视频", (done)->
+			parseString tplMsgs.videoMsg, (err, result)->
+				expect(err).to.not.exist
+				msg = new WechatMessage(result.xml)
+				converted = msg.msg2KeFuMsg("anotherUser")
+				sample = 
+					"touser":"anotherUser"
+					"msgtype":"video"
+					"video":
+						"media_id":"media_id"
+						"title":""
+						"description":""
+				expect(JSON.stringify(converted)).to.equal(JSON.stringify(sample))
+				done()
+
+	describe '拒绝不支持类型的消息，返回提示给发送者', ()->
+		it "should 拒绝地理位置消息", (done)->
+			parseString tplMsgs.geoMsg, (err, result)->
+				expect(err).to.not.exist
+				msg = new WechatMessage(result.xml)
+				converted = msg.msg2KeFuMsg("anotherUser")
+				sample = 
+					"touser":"fromUser"
+					"msgtype":"text"
+					"text":
+						"content":"抱歉，该消息无法转发！"
+				expect(JSON.stringify(converted)).to.equal(JSON.stringify(sample))
+				done()
+
+		it "should 拒绝链接消息", (done)->
+			parseString tplMsgs.linkMsg, (err, result)->
+				expect(err).to.not.exist
+				msg = new WechatMessage(result.xml)
+				converted = msg.msg2KeFuMsg("anotherUser")
+				sample = 
+					"touser":"fromUser"
+					"msgtype":"text"
+					"text":
+						"content":"抱歉，该消息无法转发！"
+				expect(JSON.stringify(converted)).to.equal(JSON.stringify(sample))
+				done()
